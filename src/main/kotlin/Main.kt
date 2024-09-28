@@ -3,6 +3,7 @@ package com.sergeypetrunin
 import klite.Config
 import klite.json.JsonBody
 import klite.Server
+import klite.TSID
 import klite.annotations.annotated
 import klite.json.JsonMapper
 import java.time.Instant
@@ -20,10 +21,10 @@ fun main() {
         context("/api") {
             useOnly<JsonBody>() // this removes other renderers in /api context
             annotated<TodoRoutes>("/todos")
-            annotated<TodoRoutes>("/todos1")
         }
         start()
     }
 }
 
-data class Todo(val item: String, val completedAt: Instant? = null)
+typealias Id<T> = TSID<T>
+data class Todo(val item: String, val completedAt: Instant? = null, val id: Id<Todo> = Id())

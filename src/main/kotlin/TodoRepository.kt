@@ -5,4 +5,5 @@ class TodoRepository {
 
     fun list() = todos.toList()
     fun save(todo: Todo) = todos.add(todo)
+    fun get(id: Id<Todo>) = todos.first { it.id == id }
 }
