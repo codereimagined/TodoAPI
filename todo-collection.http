@@ -1,0 +1,14 @@
+GET http://localhost:8080/plain/hello
+###
+GET http://localhost:8080/api/todos
+###
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{"item": "Buy tea"}
+
+###
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{"item": "Buy coffee", "completedAt": "2016-01-12T11:00:00Z"}
