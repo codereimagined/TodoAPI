@@ -2,7 +2,7 @@
 create table todos (
   id bigint primary key,
   item text not null,
-  completedat timestamptz
+  completed_at timestamptz
 );
 
 --changeset todos:initial-data context:dev
