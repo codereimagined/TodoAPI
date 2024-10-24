@@ -2,7 +2,11 @@ package com.sergeypetrunin
 
 import klite.*
 import klite.jdbc.BaseEntity
+import klite.jdbc.get
+import klite.jdbc.getOptional
+import java.sql.ResultSet
 import java.time.Instant
+import kotlin.reflect.KClass
 
 typealias Id<T> = TSID<T>
 data class Todo(
@@ -12,7 +16,15 @@ data class Todo(
 ): BaseEntity<Id<Todo>>
 
 fun Todo.persister1(): Map<String, Any?> {
-    println("Help")
     return this.toValuesSkipping(Todo::completedAt) + mapOf("completed_at" to this.completedAt)
 }
-// TODO: Overwrite backward conversion, currently completedAt returns as null always
+
+fun <T: Any> ResultSet.create1(type: KClass<T>): T {
+    return type.create {
+        val column = it.name!!
+        if (column == "completedAt") getOptional<T>("completed_at", it.type).getOrDefault(AbsentValue)
+        else if (it.isOptional) getOptional<T>(column, it.type).getOrDefault(AbsentValue)
+        else get(column, it.type)
+    }
+}
+

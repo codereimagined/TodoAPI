@@ -1,11 +1,13 @@
 package com.sergeypetrunin
 
 import klite.jdbc.*
-// import klite.toValues
+import java.sql.ResultSet
 import javax.sql.DataSource
+
 
 class TodoRepository(db: DataSource): BaseCrudRepository<Todo, Id<Todo>>(db, "todos") {
     override val orderAsc get() = "order by $table.completed_at"
+    override fun ResultSet.mapper(): Todo = this.create1(Todo::class)
     override fun Todo.persister(): Map<String, Any?> = this.persister1()
 
     // private val todos = mutableListOf<Todo>()

@@ -16,7 +16,9 @@ dependencies {
     implementation("com.github.codeborne.klite:klite-json:$kliteVersion")
     implementation("com.github.codeborne.klite:klite-jdbc:$kliteVersion")
     implementation("org.postgresql:postgresql:42.6.2")
-    testImplementation(kotlin("test"))
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.0")
+    testImplementation("ch.tutteli.atrium:atrium-fluent:1.2.0")
+    testImplementation("io.mockk:mockk:1.13.12")
 }
 
 tasks.test {
