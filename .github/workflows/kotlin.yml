@@ -21,6 +21,7 @@ jobs:
         run: ./gradlew build --no-daemon # Gradle still runs in daemon but quits, TODO: check if that's a problem
       - name: Copy files to VPS
         run: |
+          mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | awk '{gsub(/\\n/,"\n")}1' > ~/.ssh/id_rsa
           chmod 400 ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
