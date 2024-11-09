@@ -43,3 +43,7 @@ bin/
 
 ### Environment variables
 .env
+
+### Miscellaneous
+/bin
+.secrets
