@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.0.20"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 group = "com.sergeypetrunin"
@@ -23,6 +24,11 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+tasks.withType<Jar> {
+    manifest {
+        attributes["Main-Class"] = "com.sergeypetrunin.MainKt"
+    }
 }
 kotlin {
     jvmToolchain(21)

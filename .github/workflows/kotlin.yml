@@ -18,7 +18,7 @@ jobs:
       # - name: Setup Gradle # Looks like this is not needed
       #   uses: gradle/actions/setup-gradle@v4
       - name: Build and test with Gradle # TODO: Check why java 22 is used by gradlew
-        run: ./gradlew build --no-daemon # Gradle still runs in daemon but quits, TODO: check if that's a problem
+        run: ./gradlew build shadowJar --no-daemon
       - name: Copy files to VPS
         run: |
           mkdir -p ~/.ssh
@@ -26,5 +26,10 @@ jobs:
           chmod 400 ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
           sftp -o StrictHostKeyChecking=no -P ${{ secrets.SSH_PORT }} -v ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
-            put -r build/libs /home/${{ secrets.SSH_USER }}/
+            mkdir /home/${{ secrets.SSH_USER }}/TodoAPI
+            mkdir /home/${{ secrets.SSH_USER }}/TodoAPI/build
+            mkdir /home/${{ secrets.SSH_USER }}/TodoAPI/build/libs
+            put build/libs/TodoAPI-1.0-SNAPSHOT-all.jar /home/${{ secrets.SSH_USER }}/TodoAPI/build/libs
+            put Dockerfile /home/${{ secrets.SSH_USER }}/TodoAPI/
+            put docker-compose.yml /home/${{ secrets.SSH_USER }}/TodoAPI/
             EOF
