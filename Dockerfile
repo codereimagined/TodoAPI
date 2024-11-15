@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine3.20 as build
+FROM amazoncorretto:21-alpine as build
 
 WORKDIR /app
 RUN apk add binutils # for objcopy, needed by jlink
@@ -11,7 +11,11 @@ WORKDIR /app
 
 COPY --from=build /app/jre /app/jre
 COPY build/libs /app
-COPY public /app/public
+# COPY public /app/public
+ENV ENV=prod
+ENV DB_URL=jdbc:postgresql://172.17.0.1:5432/todo
+ENV DB_USER=todo
+ENV DB_PASS=todo
 
 # Run under non-privileged user with minimal write permissions
 USER user
