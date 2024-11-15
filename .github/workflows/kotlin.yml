@@ -26,9 +26,9 @@ jobs:
           chmod 400 ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
           sftp -o StrictHostKeyChecking=no -P ${{ secrets.SSH_PORT }} -v ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} <<EOF
-            mkdir /home/${{ secrets.SSH_USER }}/TodoApp
-            mkdir /home/${{ secrets.SSH_USER }}/TodoApp/build
-            mkdir /home/${{ secrets.SSH_USER }}/TodoApp/build/libs
+            mkdir /home/${{ secrets.SSH_USER }}/TodoAPI
+            mkdir /home/${{ secrets.SSH_USER }}/TodoAPI/build
+            mkdir /home/${{ secrets.SSH_USER }}/TodoAPI/build/libs
             put build/libs/TodoAPI-1.0-SNAPSHOT-all.jar /home/${{ secrets.SSH_USER }}/TodoAPI/build/libs
             put Dockerfile /home/${{ secrets.SSH_USER }}/TodoAPI/
             put docker-compose.yml /home/${{ secrets.SSH_USER }}/TodoAPI/
