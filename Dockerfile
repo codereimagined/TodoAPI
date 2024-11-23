@@ -21,7 +21,7 @@ ENV DB_PASS=todo
 USER user
 
 ENV JAVA_TOOL_OPTIONS="-Xss256K -XX:MaxRAMPercentage=80 -XX:+ExitOnOutOfMemoryError"
-CMD jre/bin/java -jar *.jar
+CMD jre/bin/java -jar *-all.jar
 
 # Heroku redefines exposed port
 ENV PORT=8080
