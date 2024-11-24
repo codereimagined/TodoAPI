@@ -12,4 +12,6 @@ Content-Type: application/json
 
 {"item": "Buy coffee", "completedAt": "2016-01-12T11:00:00Z"}
 ###
-GET  http://localhost:8080/api/todos/1yvaicfrob6i
+GET  http://localhost:8080/api/todos/23tpu8vm8pjm
+###
+DELETE http://localhost:8080/api/todos/23tpu8vm8pjm

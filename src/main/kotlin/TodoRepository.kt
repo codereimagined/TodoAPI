@@ -19,5 +19,5 @@ class TodoRepository(db: DataSource): BaseCrudRepository<Todo, Id<Todo>>(db, "to
     // fun save1(todo: Todo) = db.upsert("todos", todo.persister())
     // fun get(id: Id<Todo>) = db.select<Todo>("todos", Todo::id to id).first()
 
-    fun delete(id: Id<Todo>) = db.delete("todos", Todo::id to id);
+    fun delete(id: Id<Todo>) = db.delete("todos", Todo::id to id)
 }
